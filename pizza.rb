@@ -10,6 +10,10 @@ module Pizza
       @toppings.all? { |topping|topping.vegetarian }  
     end
 
+    def add_topping(topping)
+      @toppings << topping
+    end
+
   end
 
   class Topping
