@@ -24,9 +24,9 @@ describe Pizza::Pie do
 
 	describe '#vegetarian?' do
 		it 'returns true if all the toppings are vegetarian' do
-		vegetarian = Pizza::Pie.vegetarian?
-
-		expect(pizza.vegetarian?).to eg(true)
+		pizza = Pizza::Pie.new
+		
+		expect(pizza.vegetarian?).to eq(true)
 		end
 	end
 
