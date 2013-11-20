@@ -21,6 +21,7 @@ describe Pizza::Pie do
 			expect(pizza.toppings.size).to eq(1)
 			expect(pizza.toppings.first.name).to eq('cheese')
 		end
+	end
 
 	describe '#vegetarian?' do
 		it 'returns true if all the toppings are vegetarian' do
@@ -30,7 +31,13 @@ describe Pizza::Pie do
 		end
 	end
 
-	end
+	describe '#add_topping' do
+		it 'adds a topping to the toppings array' do
+		pizza = Pizza::Pie.new
+
+		expect(pizza.add_topping).to eq(topping)
+		end
+	end	
 end 
 
 describe Pizza::Topping do
