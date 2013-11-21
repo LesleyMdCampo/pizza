@@ -1,9 +1,11 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
+require 'timecop'
 require_relative '../pizza'
 
 describe Pizza::Pie do
+
 	describe '.initialize' do
 		it 'records all of the toppings' do
 			toppings = [
@@ -20,6 +22,33 @@ describe Pizza::Pie do
 
 			expect(pizza.toppings.size).to eq(1)
 			expect(pizza.toppings.first.name).to eq('cheese')
+		end
+	end
+
+	describe '#deliver!' do
+		it 'delivers the pizza in 30 minutes' do
+			pizza = Pizza::Pie.new
+			pizza.deliver!(now = Time.now)
+
+			expect(pizza.delivery_time).should eq(now + 30*60)
+		end
+	end
+
+	describe '#late?' do
+		context 'The pizza is on time' do
+			it 'returns false' do
+				pizza = Pizza::Pie.new
+				pizza.delivery_time = Time.now + 30
+
+				expect(pizza.late?).to eq(false)
+			end
+		context 'The pizza is late' do
+			it 'returns true' do
+				pizza = Pizza::Pie.new
+				pizza.delivery_time = Time.now - 30
+
+				expect(pizza.late?).to eq(true)
+			end
 		end
 	end
 

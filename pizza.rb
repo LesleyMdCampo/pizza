@@ -1,6 +1,6 @@
 module Pizza
   class Pie	
-  	attr_accessor :toppings
+  	attr_accessor :toppings, :delivery_time
 
   	def initialize(toppings=[Pizza::Topping.new('cheese', vegetarian: true)])
     	@toppings = toppings
@@ -12,6 +12,14 @@ module Pizza
 
     def add_topping(topping)
       @toppings << topping
+    end
+
+    def deliver!(now = Time.now)
+      @delivery_time = now + 30*60
+    end
+
+    def late
+      @delivery_time < Time.now
     end
 
   end
